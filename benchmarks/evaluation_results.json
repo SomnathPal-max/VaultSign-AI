@@ -3,7 +3,7 @@
   "overall_precision": 1.0,
   "overall_recall": 0.9117647058823529,
   "false_fabrication_rate": 0.0,
-  "latency_ms": 5.339498519897461,
+  "latency_ms": 9.400529861450195,
   "by_family": {
     "ip_transfer": {
       "label": "IP Transfer / Work for Hire",

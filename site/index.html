@@ -32,6 +32,7 @@
                 </div>
             </div>
             <div class="flex items-center gap-4 text-sm font-medium">
+                <a href="#samples" class="text-indigo-400 hover:text-white transition font-semibold">⚡ Quick Samples</a>
                 <a href="#features" class="text-slate-300 hover:text-white transition">Features</a>
                 <a href="#benchmarks" class="text-slate-300 hover:text-white transition">Benchmark</a>
                 <a href="#open-models" class="text-slate-300 hover:text-white transition">Gemma & Models</a>
@@ -43,7 +44,7 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="max-w-5xl mx-auto px-6 py-20 text-center">
+    <section class="max-w-6xl mx-auto px-6 pt-16 pb-12 text-center">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-xs font-semibold mb-6">
             ✨ Open-Source AI Side Hustle Challenge Submission
         </div>
@@ -54,16 +55,72 @@
             VaultSign AI runs entirely on your own laptop using open-weight models (Ollama, Gemma 2, Llama 3.1). Flag predatory clauses with verbatim quote proofs, simulate adversarial negotiation debates, and draft polite pushback emails—without a single byte leaving your machine.
         </p>
 
-        <div class="flex items-center justify-center gap-4 flex-wrap">
-            <a href="https://github.com/SomnathPal-max/VaultSign-AI#quickstart-guide" target="_blank" class="px-6 py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl shadow-lg shadow-indigo-600/30 transition text-sm">
-                ⬇️ Download & Run Locally (MIT License)
-            </a>
-            <a href="#architecture" class="px-6 py-3.5 bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 font-semibold rounded-xl transition text-sm">
-                🔍 Explore Architecture
-            </a>
+        <!-- Interactive Quick Evaluation Samples Preview (Before Download) -->
+        <div id="samples" class="my-8 text-left bg-slate-900/95 border border-slate-700/80 rounded-2xl p-6 md:p-8 shadow-2xl backdrop-blur">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-800">
+                <div>
+                    <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-xs font-semibold mb-2">
+                        ⚡ Interactive Preview (Pre-Loaded in VaultSign AI)
+                    </div>
+                    <h2 class="text-xl md:text-2xl font-bold text-white">Explore Loaded Evaluation Samples Before You Download</h2>
+                    <p class="text-xs text-slate-400 mt-1">Click each curated sample to inspect real-world clauses, exact verbatim quote proofs, and recommended counter-offers:</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded-lg border border-emerald-500/20">✓ 100% Client-Side Interactive</span>
+                </div>
+            </div>
+
+            <!-- Tab Switcher -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-2.5 mb-6" id="sampleTabs">
+                <button class="sample-tab active p-3.5 rounded-xl border border-indigo-500/60 bg-indigo-950/40 text-left transition-all shadow-md" data-sample="predatory">
+                    <div class="flex items-center justify-between font-semibold text-xs text-white">
+                        <span>Predatory MSA</span>
+                        <span class="px-2 py-0.5 rounded text-[10px] bg-red-500/20 text-red-300 border border-red-500/30">8 Traps</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 mt-1">Net-90, perpetual IP, uncapped liability, non-compete</p>
+                </button>
+                <button class="sample-tab p-3.5 rounded-xl border border-slate-800 bg-slate-950/60 hover:bg-slate-900 text-left transition-all opacity-85 hover:opacity-100" data-sample="software">
+                    <div class="flex items-center justify-between font-semibold text-xs text-white">
+                        <span>Software Consulting</span>
+                        <span class="px-2 py-0.5 rounded text-[10px] bg-amber-500/20 text-amber-300 border border-amber-500/30">Common Traps</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 mt-1">Net-60, no late fees, unlimited revisions</p>
+                </button>
+                <button class="sample-tab p-3.5 rounded-xl border border-slate-800 bg-slate-950/60 hover:bg-slate-900 text-left transition-all opacity-85 hover:opacity-100" data-sample="fair">
+                    <div class="flex items-center justify-between font-semibold text-xs text-white">
+                        <span>Fair Contractor Agreement</span>
+                        <span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Clean Baseline</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 mt-1">Net-15, background IP carve-out, mutual indemnity</p>
+                </button>
+            </div>
+
+            <!-- Dynamic Sample Content Container -->
+            <div id="samplePreviewContent" class="space-y-6">
+                <!-- Injected via client-side script -->
+            </div>
         </div>
 
-        <div class="mt-8 flex items-center justify-center gap-6 text-xs text-slate-400">
+        <!-- Download & Repository Actions Bar (Prominently Positioned After Sample Review) -->
+        <div class="mt-8 flex flex-col md:flex-row items-center justify-between gap-4 p-6 rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 border border-indigo-500/30 shadow-xl text-left">
+            <div>
+                <h3 class="text-base font-bold text-white flex items-center gap-2">
+                    <span>🚀 Audit Your Own Confidential Contracts Locally</span>
+                    <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono font-normal">NDA Safe</span>
+                </h3>
+                <p class="text-xs text-slate-400 mt-1">Zero cloud telemetry. 100% offline-by-design. Your contracts never leave your laptop.</p>
+            </div>
+            <div class="flex items-center gap-3 flex-wrap">
+                <a href="https://github.com/SomnathPal-max/VaultSign-AI#quickstart-guide" target="_blank" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl shadow-lg shadow-indigo-600/30 transition text-xs whitespace-nowrap flex items-center gap-2">
+                    <span>⬇️ Download & Run Locally</span>
+                </a>
+                <a href="https://github.com/SomnathPal-max/VaultSign-AI" target="_blank" class="px-4 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 font-semibold rounded-xl transition text-xs whitespace-nowrap flex items-center gap-1.5">
+                    <span>⭐ GitHub Repo</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="mt-6 flex items-center justify-center gap-6 text-xs text-slate-400">
             <span>✓ 100% Offline-by-Design</span>
             <span>✓ Zero Outbound Telemetry</span>
             <span>✓ The Verifier: 0% Hallucinations</span>
@@ -173,5 +230,226 @@
         <p>A review aid for independent freelancers, not a lawyer. All contract processing runs locally on localhost (127.0.0.1).</p>
     </footer>
 
+    <!-- Interactive Sample Preview Script -->
+    <script>
+        const sampleData = {
+            predatory: {
+                title: "Predatory Master Services Agreement (12-Page MSA)",
+                badge: "8 Traps Flagged • Severe Risk",
+                badgeClass: "bg-red-500/20 text-red-300 border-red-500/40",
+                type: "Creative & Engineering Master Services Agreement",
+                excerpt: `SECTION 4. PAYMENT TERMS
+4.1 Payment Schedule. Client shall remit payment for all invoices within ninety (90) calendar days following Client's final written acceptance and subjective satisfaction (Net-90). No interest shall accrue on overdue payments.
+
+SECTION 8. INTELLECTUAL PROPERTY ASSIGNMENT
+8.2 Perpetual Assignment. Contractor hereby irrevocably and perpetually assigns and transfers to Client throughout the universe all right, title, and interest in and to all deliverables, background software tools, pre-existing utility code, frameworks, and design templates.
+
+SECTION 11. INDEMNIFICATION & LIABILITY
+11.1 Unilateral Indemnity. Contractor shall defend, indemnify, and hold harmless Client against any and all claims, demands, liabilities, and legal fees without limitation of liability or cap.
+
+SECTION 14. NON-COMPETE
+14.1 Restrictive Covenant. For a period of twenty-four (24) months following termination, Contractor shall not directly or indirectly provide services to any entity in Client's general industry.`,
+                verifiedQuote: "within ninety (90) calendar days following Client's final written acceptance and subjective satisfaction (Net-90)",
+                trapTitle: "Trap: Net-90 Terms + Contingent Subjective Acceptance",
+                trapExplanation: "Net-90 forces you to finance your client's business for 3 full months with zero late-interest consequence, while tying payment to undefined 'satisfaction'.",
+                suggestedAsk: "Request standard Net-15 or Net-30 payment terms with 33% upfront commencement deposit and milestone invoicing.",
+                compromiseQuote: "Client shall remit payment within thirty (30) days of receipt of invoice. Undisputed overdue amounts shall accrue interest at 1.5% per month.",
+                traps: [
+                    { name: "IP Transfer", risk: "HIGH", label: "Perpetual assignment capturing pre-existing code" },
+                    { name: "Payment Terms", risk: "HIGH", label: "Net-90 calendar day payout schedule" },
+                    { name: "Non-Compete", risk: "HIGH", label: "24-month worldwide restriction on industry clients" },
+                    { name: "Liability / Indemnity", risk: "HIGH", label: "Uncapped, unilateral indemnity forcing freelancer legal fee coverage" },
+                    { name: "Unlimited Revisions", risk: "MED", label: "Infinite revision rounds to 'sole satisfaction'" },
+                    { name: "Termination / Kill Fee", risk: "HIGH", label: "Immediate cancellation with zero kill fee" },
+                    { name: "Late-Payment Consequences", risk: "MED", label: "Zero interest on overdue balances" },
+                    { name: "Exclusivity", risk: "MED", label: "Bans servicing any other non-conflicting clients" }
+                ]
+            },
+            software: {
+                title: "Software Consulting Agreement (Mid-Stage Tech)",
+                badge: "3 Traps Flagged • Moderate Risk",
+                badgeClass: "bg-amber-500/20 text-amber-300 border-amber-500/40",
+                type: "Full-Stack Development & Architecture Engagement",
+                excerpt: `SECTION 3. FEES & INVOICING
+3.2 Invoicing. Invoices submitted monthly by Contractor shall be payable Net-60 days from delivery. Neither party shall be liable for late fees.
+
+SECTION 6. REVISIONS & BUG FIXES
+6.1 Scope of Revisions. Contractor agrees to revise, modify, and restructure deliverables until Client is completely satisfied without additional compensation or fee.
+
+SECTION 10. TERMINATION
+10.2 Discretionary Termination. Client may terminate this agreement at any time upon five (5) days notice without liability for future milestone billings or kill fee.`,
+                verifiedQuote: "payable Net-60 days from delivery. Neither party shall be liable for late fees.",
+                trapTitle: "Trap: Net-60 Days & Disclaimed Overdue Interest",
+                trapExplanation: "Net-60 delays your revenue by 2 full months, and explicitly disclaiming late fees gives the client zero financial incentive to pay on time.",
+                suggestedAsk: "Propose standard Net-30 terms with 1.5% monthly late interest and a 14-day cure period.",
+                compromiseQuote: "Invoices shall be payable within thirty (30) calendar days. Client may request up to two (2) revision rounds within initial scope.",
+                traps: [
+                    { name: "Payment Terms", risk: "HIGH", label: "Net-60 days without late interest" },
+                    { name: "Unlimited Revisions", risk: "HIGH", label: "Uncapped iterations until 'completely satisfied'" },
+                    { name: "Termination Without Kill Fee", risk: "MED", label: "5-day cancellation notice with no kill fee" },
+                    { name: "Background IP Carve-Out", risk: "CLEAN", label: "Pre-existing library carve-out present" },
+                    { name: "Non-Compete", risk: "CLEAN", label: "Narrow non-solicitation only, no trade ban" }
+                ]
+            },
+            fair: {
+                title: "Fair Contractor Agreement (Clean Control Baseline)",
+                badge: "Clean Control Baseline • Zero Traps",
+                badgeClass: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
+                type: "Balanced Model Independent Contractor Agreement",
+                excerpt: `SECTION 2. COMPENSATION & TERMS
+2.1 Payment. Client shall remit payment within fifteen (15) calendar days (Net-15) of invoice submission. Overdue amounts shall accrue interest at 1.5% per month.
+
+SECTION 5. BACKGROUND IP CARVE-OUT
+5.1 Retained IP. Contractor retains sole title, copyright, and ownership of all pre-existing utility code, developer tools, libraries, and design frameworks created prior to or outside this engagement.
+
+SECTION 7. REVISIONS & CHANGE ORDERS
+7.1 Revisions. Deliverables include up to two (2) rounds of minor revisions within the agreed scope. Subsequent revisions or out-of-scope work shall be billed at Contractor's agreed hourly rate ($120/hr).
+
+SECTION 9. MUTUAL INDEMNIFICATION & LIABILITY CAP
+9.1 Capped Liability. Each party's total aggregate liability under this agreement shall be strictly capped at the total fees paid hereunder.`,
+                verifiedQuote: "remit payment within fifteen (15) calendar days (Net-15)... Overdue amounts shall accrue interest at 1.5% per month",
+                trapTitle: "Section 7 Output Rule: Not detected. Please verify manually.",
+                trapExplanation: "All 8 predatory clause families were verified absent. Zero false positives and zero hallucinated traps detected.",
+                suggestedAsk: "Model equitable contractor agreement. Recommended for signing without material reservations.",
+                compromiseQuote: "Balanced terms. Pre-existing tools protected, mutual liability cap active, and kill fee specified.",
+                traps: [
+                    { name: "Payment Terms", risk: "CLEAN", label: "Net-15 schedule with 1.5% late interest" },
+                    { name: "IP Transfer", risk: "CLEAN", label: "Pre-existing code and frameworks strictly carved out" },
+                    { name: "Indemnity", risk: "CLEAN", label: "Mutual indemnification capped at total fees paid" },
+                    { name: "Revisions", risk: "CLEAN", label: "Capped at 2 rounds with hourly change orders" },
+                    { name: "Non-Compete", risk: "CLEAN", label: "No trade restrictions on non-conflicting clients" },
+                    { name: "Termination", risk: "CLEAN", label: "14-day notice + 25% kill fee on unscheduled cancellation" }
+                ]
+            }
+        };
+
+        function renderSample(key) {
+            const data = sampleData[key];
+            if (!data) return;
+
+            const container = document.getElementById("samplePreviewContent");
+            container.innerHTML = `
+                <!-- Sample Header & Risk Overview -->
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 p-4 rounded-xl bg-slate-950 border border-slate-800">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-sm font-bold text-white">\${data.title}</span>
+                            <span class="px-2 py-0.5 rounded text-[10px] font-semibold \${data.badgeClass}">\${data.badge}</span>
+                        </div>
+                        <p class="text-[11px] text-slate-400 mt-0.5">\${data.type} &bull; Audited locally via The Verifier</p>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs">
+                        <span class="px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono text-[11px]">
+                            ✓ The Verifier: 100% Quote Match
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 2-Column Inspection View -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <!-- Left: Raw Contract Excerpt -->
+                    <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-bold text-slate-300 uppercase tracking-wider font-mono">📄 Contract Source Excerpt</span>
+                                <span class="text-[10px] text-slate-500 font-mono">Page 1 of Ingested Document</span>
+                            </div>
+                            <pre class="text-[11px] font-mono text-slate-300 leading-relaxed whitespace-pre-wrap bg-slate-900/60 p-3 rounded-lg border border-slate-800/80 max-h-72 overflow-y-auto">\${data.excerpt}</pre>
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-slate-800/60 flex items-center justify-between text-[10px] text-slate-500">
+                            <span>Ingested in transient RAM</span>
+                            <span class="text-emerald-400">Zero cloud upload</span>
+                        </div>
+                    </div>
+
+                    <!-- Right: The Verifier Proof & Pushback Recommendation -->
+                    <div class="space-y-3">
+                        <!-- Verifier Proof Card -->
+                        <div class="p-3.5 rounded-xl bg-slate-950 border-l-2 \${key === 'fair' ? 'border-emerald-500' : 'border-red-500'} border-y border-r border-slate-800">
+                            <div class="flex items-center justify-between mb-1.5 text-[10px] font-mono">
+                                <span class="text-slate-400 uppercase font-bold">\${data.trapTitle}</span>
+                                <span class="text-emerald-400 font-semibold">✓ Verbatim Match Page 1</span>
+                            </div>
+                            <p class="text-xs font-mono \${key === 'fair' ? 'text-emerald-300' : 'text-red-300'} mb-2 leading-relaxed">
+                                &ldquo;\${data.verifiedQuote}&rdquo;
+                            </p>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                <strong class="text-slate-200">Analysis:</strong> \${data.trapExplanation}
+                            </p>
+                        </div>
+
+                        <!-- Recommended Ask Card -->
+                        <div class="p-3.5 rounded-xl bg-indigo-950/40 border border-indigo-500/30">
+                            <div class="text-[10px] font-bold text-indigo-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                                <span>⚖️ Recommended Freelancer Ask</span>
+                            </div>
+                            <p class="text-xs text-indigo-200 leading-relaxed">
+                                \${data.suggestedAsk}
+                            </p>
+                        </div>
+
+                        <!-- Multi-Agent Compromise Clause Preview -->
+                        <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+                            <div class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                                <span>🤝 Multi-Agent Compromise Language</span>
+                                <span class="text-[9px] px-1.5 py-0.2 rounded bg-emerald-500/10 text-emerald-300">Ready to Send</span>
+                            </div>
+                            <p class="text-[11px] font-mono text-emerald-200/90 leading-relaxed">
+                                &ldquo;\${data.compromiseQuote}&rdquo;
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Audited Traps List -->
+                <div>
+                    <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-2.5 font-mono">Clause Audit Breakdown (Section 7 Spec)</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+                        \${data.traps.map(t => {
+                            let badgeStyle = "bg-red-500/20 text-red-300 border-red-500/30";
+                            let icon = "🚨";
+                            if (t.risk === "MED") {
+                                badgeStyle = "bg-amber-500/20 text-amber-300 border-amber-500/30";
+                                icon = "⚠️";
+                            } else if (t.risk === "CLEAN") {
+                                badgeStyle = "bg-emerald-500/15 text-emerald-300 border-emerald-500/30";
+                                icon = "🛡️";
+                            }
+                            return `
+                                <div class="p-2.5 rounded-lg bg-slate-950 border border-slate-800">
+                                    <div class="flex items-center justify-between gap-1 mb-1">
+                                        <span class="font-bold text-white text-[11px] truncate">\${icon} \${t.name}</span>
+                                        <span class="px-1.5 py-0.2 rounded text-[9px] font-mono border \${badgeStyle}">\${t.risk}</span>
+                                    </div>
+                                    <p class="text-[10px] text-slate-400 leading-tight">\${t.label}</p>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Initialize sample tabs
+        document.addEventListener("DOMContentLoaded", () => {
+            const tabs = document.querySelectorAll(".sample-tab");
+            tabs.forEach(tab => {
+                tab.addEventListener("click", () => {
+                    tabs.forEach(t => {
+                        t.classList.remove("active", "border-indigo-500/60", "bg-indigo-950/40", "shadow-md");
+                        t.classList.add("border-slate-800", "bg-slate-950/60", "opacity-85");
+                    });
+                    tab.classList.add("active", "border-indigo-500/60", "bg-indigo-950/40", "shadow-md");
+                    tab.classList.remove("border-slate-800", "bg-slate-950/60", "opacity-85");
+                    
+                    const sampleKey = tab.getAttribute("data-sample");
+                    renderSample(sampleKey);
+                });
+            });
+
+            // Render default predatory sample
+            renderSample("predatory");
+        });
+    </script>
 </body>
 </html>

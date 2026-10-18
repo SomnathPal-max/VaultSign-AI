@@ -2,7 +2,7 @@
 
 **Dataset Size**: 25 Contracts (Synthetic variations & realistic freelancer templates)  
 **Evaluation Mode**: `Deterministic Heuristic Baseline`  
-**Average Latency**: 5.3 ms / contract  
+**Average Latency**: 9.4 ms / contract  
 **Overall False-Fabrication Rate**: 0.0% (All rejected quotes filtered out before presentation)
 
 ## Section 8 Measured Results Table
@@ -40,7 +40,7 @@
 | **Clause Recall** | 91.2% | 94.2% |
 | **Hallucination Control** | Verifier Required | Verifier Enforced on Quotes + Compromise |
 | **Output Deliverable** | Red Flag + Summary | Complete Adversarial Debate + Tested Compromise Clause |
-| **Average Latency** | ~5 ms | ~16 ms |
+| **Average Latency** | ~9 ms | ~28 ms |
 | **Recommended Use** | Standard quick audit | Complex or high-stakes contracts ($10k+ gigs) |
 
 ### Verifier Efficacy
