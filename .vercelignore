@@ -1,0 +1,12 @@
+# Ignore backend Python files for Vercel static deployment
+requirements.txt
+run.py
+run.bat
+app/
+tests/
+benchmarks/
+data/
+build_sessions/
+*.pdf
+.pytest_cache/
+.github/
