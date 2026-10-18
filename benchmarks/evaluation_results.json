@@ -1,0 +1,97 @@
+{
+  "dataset_size": 25,
+  "overall_precision": 1.0,
+  "overall_recall": 0.9117647058823529,
+  "false_fabrication_rate": 0.0,
+  "latency_ms": 5.339498519897461,
+  "by_family": {
+    "ip_transfer": {
+      "label": "IP Transfer / Work for Hire",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "false_fabrication_rate": "0.0%",
+      "tp": 5,
+      "fp": 0,
+      "fn": 0,
+      "tn": 20
+    },
+    "extended_payment": {
+      "label": "Extended Payment Terms",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "false_fabrication_rate": "0.0%",
+      "tp": 5,
+      "fp": 0,
+      "fn": 0,
+      "tn": 20
+    },
+    "broad_non_compete": {
+      "label": "Broad Non-Compete",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "false_fabrication_rate": "0.0%",
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "tn": 21
+    },
+    "asymmetric_liability": {
+      "label": "Asymmetric Liability / Indemnification",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "false_fabrication_rate": "0.0%",
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "tn": 21
+    },
+    "unlimited_revisions": {
+      "label": "Unlimited Revisions / Scope Creep",
+      "precision": 1.0,
+      "recall": 0.75,
+      "f1": 0.857,
+      "false_fabrication_rate": "0.0%",
+      "tp": 3,
+      "fp": 0,
+      "fn": 1,
+      "tn": 21
+    },
+    "termination_kill_fee": {
+      "label": "Termination & Kill Fee",
+      "precision": 1.0,
+      "recall": 0.75,
+      "f1": 0.857,
+      "false_fabrication_rate": "0.0%",
+      "tp": 3,
+      "fp": 0,
+      "fn": 1,
+      "tn": 21
+    },
+    "late_payment_consequences": {
+      "label": "Late-Payment Consequences",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "false_fabrication_rate": "0.0%",
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "tn": 21
+    },
+    "exclusivity": {
+      "label": "Exclusivity Restrictions",
+      "precision": 1.0,
+      "recall": 0.75,
+      "f1": 0.857,
+      "false_fabrication_rate": "0.0%",
+      "tp": 3,
+      "fp": 0,
+      "fn": 1,
+      "tn": 21
+    }
+  }
+}

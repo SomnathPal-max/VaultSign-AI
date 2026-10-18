@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VaultSign AI - Zero-Trust Local Red-Flag Contract Reviewer</title>
+    <!-- Tailwind CSS with offline fallback -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        if (window.tailwind) {
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            plum: {
+                                950: '#130917',
+                                900: '#1d0e23',
+                                850: '#211028',
+                                800: '#25122c',
+                                700: '#381a42',
+                                600: '#5a2468',
+                                500: '#9b3378',
+                                400: '#b83c8f',
+                                300: '#d96ab2',
+                            },
+                            milk: {
+                                pure: '#fffefb',
+                                cream: '#fbf6ec',
+                                soft: '#f2e7d7',
+                                latte: '#c7b5a2',
+                                muted: '#9d8c7c',
+                            }
+                        }
+                    }
+                }
+            };
+        }
+    </script>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="min-h-screen flex flex-col font-sans antialiased" style="background-color: #130917; color: #f2e7d7;">
+
+    <!-- Top Navigation & Privacy Trust Bar -->
+    <header class="border-b sticky top-0 z-40 px-6 py-3.5 backdrop-blur" style="background-color: rgba(27, 13, 33, 0.95); border-color: #482352;">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg" style="background: linear-gradient(135deg, #782260 0%, #a83884 50%, #f7e8ce 100%); box-shadow: 0 4px 18px rgba(168, 56, 132, 0.45);">
+                    <span class="text-xl font-black text-white">V</span>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-lg font-bold tracking-tight" style="color: #fffefb;">VaultSign AI</span>
+                    </div>
+                    <p class="text-xs" style="color: #c7b5a2;">Zero-Trust, Local Red-Flag Contract Reviewer for Freelancers</p>
+                </div>
+            </div>
+
+            <!-- Controls & Badges (Right Container) -->
+            <div class="flex items-center gap-3 flex-wrap">
+                <!-- Trust Indicator Badges -->
+                <div class="hidden md:flex items-center gap-2 text-xs">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        Localhost (127.0.0.1)
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 font-medium">
+                        🛡️ Zero Telemetry
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 font-medium">
+                        ⚡ In-Memory
+                    </span>
+                </div>
+
+                <!-- Model Selection & Reset -->
+                <div class="flex items-center gap-2">
+                    <select id="modelSelector" class="bg-slate-800 text-xs text-slate-200 border border-slate-700 rounded-lg px-3 py-1.5 focus:outline-none focus:border-indigo-500">
+                        <option value="deterministic">Deterministic Engine (Offline Baseline)</option>
+                        <option value="gemma2:9b">Gemma 2 (9B) - Ollama</option>
+                        <option value="gemma2:2b">Gemma 2 (2B) - Low RAM</option>
+                        <option value="llama3.1:8b" selected>Llama 3.1 (8B) - Ollama</option>
+                        <option value="llama3.2:3b">Llama 3.2 (3B) - Low RAM</option>
+                        <option value="qwen2.5:7b">Qwen 2.5 (7B) - Ollama</option>
+                    </select>
+                    <button id="resetBtn" title="Wipe session and document data from RAM" class="text-xs px-3 py-1.5 rounded-lg bg-rose-500/10 text-rose-300 border border-rose-500/20 hover:bg-rose-500/20 transition-all">
+                        🧹 Wipe Memory
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Prominent Legal Guardrail Banner (Section 11) -->
+    <div class="bg-amber-950/40 border-b border-amber-800/40 px-6 py-2.5 text-xs text-amber-200/90">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+            <div class="flex items-start gap-2">
+                <span class="text-amber-400 font-bold text-sm">⚠️</span>
+                <div>
+                    <strong class="text-amber-300">NOT LEGAL ADVICE:</strong> VaultSign AI is an automated review aid to help spot contract traps and prepare negotiation questions. It is not a lawyer and does not provide legal representation. Enforceability of non-competes, IP assignments, and liability varies by jurisdiction.
+                </div>
+            </div>
+            <span class="hidden md:inline-block text-[11px] text-amber-300/70 shrink-0">Review Aid, Not Counsel</span>
+        </div>
+    </div>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto w-full px-6 py-8 flex-1 flex flex-col gap-8">
+
+        <!-- Top Section: Upload & Sample Contract Switcher -->
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <!-- Upload Box -->
+            <div class="lg:col-span-2 bg-slate-800/50 border border-slate-700/60 rounded-2xl p-6 shadow-xl backdrop-blur">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-base font-bold text-white flex items-center gap-2">
+                        📄 Ingest Client Agreement
+                        <span class="text-xs font-normal text-slate-400">(PDF, DOCX, or TXT)</span>
+                    </h2>
+                    <span class="text-xs text-emerald-400 font-mono">Wi-Fi Off Compatible</span>
+                </div>
+
+                <div id="dropZone" class="border-2 border-dashed border-slate-700 hover:border-indigo-500/60 rounded-xl p-8 text-center cursor-pointer transition-all bg-slate-900/40">
+                    <input type="file" id="fileInput" class="hidden" accept=".pdf,.docx,.doc,.txt,.md">
+                    <div class="flex flex-col items-center justify-center gap-2">
+                        <div class="w-12 h-12 rounded-full bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-2xl mb-1">
+                            📂
+                        </div>
+                        <p class="text-sm font-semibold text-slate-200" id="dropLabel">Drag and drop contract here, or <span class="text-indigo-400 hover:underline">browse files</span></p>
+                        <p class="text-xs text-slate-500">Processed locally inside memory. No document data leaves your device.</p>
+                    </div>
+                </div>
+
+                <div class="mt-4 flex items-center justify-between flex-wrap gap-3">
+                    <div class="flex items-center gap-2">
+                        <span id="selectedFileName" class="text-xs font-mono text-slate-300 bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-700 hidden">
+                            No file selected
+                        </span>
+                    </div>
+                    <button id="analyzeBtn" class="bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold px-6 py-2 rounded-xl shadow-lg shadow-indigo-600/30 transition-all flex items-center gap-2">
+                        <span>🔍 Run Zero-Trust Red-Flag Audit</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quick Test Samples -->
+            <div class="bg-slate-800/50 border border-slate-700/60 rounded-2xl p-6 shadow-xl flex flex-col justify-between">
+                <div>
+                    <h2 class="text-base font-bold text-white mb-2 flex items-center gap-2">
+                        ⚡ Quick Evaluation Samples
+                    </h2>
+                    <p class="text-xs text-slate-400 mb-4">
+                        Test immediately with curated freelancer contracts containing real-world predatory clauses or clean controls:
+                    </p>
+
+                    <div class="space-y-2.5">
+                        <button class="sample-btn w-full text-left p-3 rounded-xl bg-slate-900/60 hover:bg-slate-900 border border-slate-700/80 hover:border-amber-500/50 transition-all text-xs" data-sample="predatory_freelance_master_services.txt">
+                            <div class="font-semibold text-amber-300 flex items-center justify-between">
+                                <span>Predatory Master Services Agreement</span>
+                                <span class="px-1.5 py-0.5 text-[10px] bg-red-500/20 text-red-400 rounded">8 Traps</span>
+                            </div>
+                            <p class="text-slate-400 text-[11px] mt-1">Net-90, perpetual IP, uncapped indemnity, broad non-compete, no kill fee.</p>
+                        </button>
+
+                        <button class="sample-btn w-full text-left p-3 rounded-xl bg-slate-900/60 hover:bg-slate-900 border border-slate-700/80 hover:border-indigo-500/50 transition-all text-xs" data-sample="software_consulting_agreement.txt">
+                            <div class="font-semibold text-indigo-300 flex items-center justify-between">
+                                <span>Software Consulting Agreement</span>
+                                <span class="px-1.5 py-0.5 text-[10px] bg-indigo-500/20 text-indigo-300 rounded">Common Traps</span>
+                            </div>
+                            <p class="text-slate-400 text-[11px] mt-1">Net-60 terms, pre-existing code IP capture, client satisfaction revisions.</p>
+                        </button>
+
+                        <button class="sample-btn w-full text-left p-3 rounded-xl bg-slate-900/60 hover:bg-slate-900 border border-slate-700/80 hover:border-emerald-500/50 transition-all text-xs" data-sample="fair_contractor_agreement.txt">
+                            <div class="font-semibold text-emerald-300 flex items-center justify-between">
+                                <span>Fair Contractor Agreement (Control)</span>
+                                <span class="px-1.5 py-0.5 text-[10px] bg-emerald-500/20 text-emerald-300 rounded">Clean Baseline</span>
+                            </div>
+                            <p class="text-slate-400 text-[11px] mt-1">Net-15, background IP carve-out, mutual indemnity, clear kill fees.</p>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mt-4 pt-3 border-t border-slate-700/50 text-[11px] text-slate-500 text-center">
+                    Simulates actual contracts without uploading personal documents.
+                </div>
+            </div>
+        </section>
+
+        <!-- Loading Indicator -->
+        <div id="loadingIndicator" class="hidden py-12 flex flex-col items-center justify-center gap-3">
+            <div class="w-10 h-10 border-4 border-indigo-500/30 border-t-indigo-500 rounded-full animate-spin"></div>
+            <p class="text-sm font-medium text-slate-300">Auditing contract sections & executing Verifier quotes...</p>
+            <p class="text-xs text-slate-500">Matching quotes verbatim to source pages to eliminate hallucinations.</p>
+        </div>
+
+        <!-- Audit Results Container -->
+        <section id="resultsSection" class="hidden space-y-6">
+
+            <!-- Summary KPI Dashboard -->
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <div class="bg-slate-800/40 border border-slate-700/60 rounded-xl p-4 text-center">
+                    <p class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Traps Audited</p>
+                    <p class="text-2xl font-black text-white mt-1" id="kpiTotal">8</p>
+                    <p class="text-[10px] text-slate-500 mt-0.5">Section 7 Spec</p>
+                </div>
+                <div class="bg-red-500/10 border border-red-500/30 rounded-xl p-4 text-center">
+                    <p class="text-[11px] font-semibold text-red-400 uppercase tracking-wider">Red Flags Found</p>
+                    <p class="text-2xl font-black text-red-400 mt-1" id="kpiFlags">0</p>
+                    <p class="text-[10px] text-red-300/60 mt-0.5">Require Action</p>
+                </div>
+                <div class="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4 text-center">
+                    <p class="text-[11px] font-semibold text-amber-400 uppercase tracking-wider">High Risk</p>
+                    <p class="text-2xl font-black text-amber-400 mt-1" id="kpiHighRisk">0</p>
+                    <p class="text-[10px] text-amber-300/60 mt-0.5">Severe Exposure</p>
+                </div>
+                <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-4 text-center">
+                    <p class="text-[11px] font-semibold text-emerald-400 uppercase tracking-wider">Verifier Verified</p>
+                    <p class="text-2xl font-black text-emerald-400 mt-1" id="kpiVerified">100%</p>
+                    <p class="text-[10px] text-emerald-300/60 mt-0.5">Quote Proof Found</p>
+                </div>
+                <div class="bg-purple-500/10 border border-purple-500/30 rounded-xl p-4 text-center col-span-2 md:col-span-1">
+                    <p class="text-[11px] font-semibold text-purple-400 uppercase tracking-wider">Hallucinations Dropped</p>
+                    <p class="text-2xl font-black text-purple-400 mt-1" id="kpiDropped">0</p>
+                    <p class="text-[10px] text-purple-300/60 mt-0.5">Unmatched Discarded</p>
+                </div>
+            </div>
+
+            <!-- Toolbar: Export & Actions -->
+            <div class="flex items-center justify-between flex-wrap gap-4 bg-slate-800/30 p-4 rounded-xl border border-slate-700/50">
+                <div class="flex items-center gap-2">
+                    <span class="text-xs text-slate-400">Audited Document:</span>
+                    <span id="reportDocName" class="text-xs font-mono font-semibold text-indigo-300">sample.pdf</span>
+                    <span id="reportPages" class="text-xs text-slate-500">(1 page)</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button id="exportMdBtn" class="text-xs px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg text-slate-200 transition-all">
+                        📥 Export Markdown
+                    </button>
+                    <button id="exportHtmlBtn" class="text-xs px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg text-slate-200 transition-all">
+                        🌐 Export HTML Report
+                    </button>
+                    <button id="exportJsonBtn" class="text-xs px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg text-slate-200 transition-all">
+                        📋 JSON Audit
+                    </button>
+                </div>
+            </div>
+
+            <!-- 8 Freelancer Clause Families Grid -->
+            <div>
+                <h3 class="text-lg font-bold text-white mb-4 flex items-center justify-between">
+                    <span>8-Trap Freelancer Clause Audit</span>
+                    <span class="text-xs font-normal text-slate-400">Section 7 Specification</span>
+                </h3>
+                <div id="clauseCardsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Cards dynamically rendered by app.js -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Multi-Agent Negotiation Simulator Modal (Pro) -->
+    <div id="debateModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+            <!-- Modal Header -->
+            <div class="p-5 border-b border-slate-800 flex items-center justify-between bg-slate-950">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-sm font-bold">
+                        ⚖️
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-white">Multi-Agent Negotiation Simulator (Pro)</h3>
+                        <p class="text-xs text-slate-400" id="debateClauseTitle">Clause: Extended Payment Terms</p>
+                    </div>
+                </div>
+                <button id="closeDebateBtn" class="text-slate-400 hover:text-white text-xl px-2">✕</button>
+            </div>
+
+            <!-- Debate Turns Body -->
+            <div class="p-6 overflow-y-auto space-y-4 flex-1" id="debateContent">
+                <!-- Dynamically populated -->
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-4 border-t border-slate-800 bg-slate-950 flex items-center justify-between text-xs text-slate-400">
+                <span class="text-[11px] text-amber-400/90">⚖️ Compromise wording is an editable suggestion for review with legal counsel.</span>
+                <button id="copyCompromiseBtn" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-lg text-xs transition-all">
+                    📋 Copy Compromise Clause
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pushback Email Generator Modal -->
+    <div id="pushbackModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+            <!-- Modal Header -->
+            <div class="p-5 border-b border-slate-800 flex items-center justify-between bg-slate-950">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-600 flex items-center justify-center text-sm font-bold">
+                        ✉️
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-white">Pushback Email Generator</h3>
+                        <p class="text-xs text-slate-400" id="emailClauseTitle">Polite, Firm Negotiation Correspondence</p>
+                    </div>
+                </div>
+                <button id="closePushbackBtn" class="text-slate-400 hover:text-white text-xl px-2">✕</button>
+            </div>
+
+            <!-- Controls: Tone & Parameters -->
+            <div class="p-5 border-b border-slate-800 bg-slate-900/60 space-y-3">
+                <div class="flex items-center justify-between flex-wrap gap-2">
+                    <label class="text-xs font-semibold text-slate-300">Tone Strategy:</label>
+                    <div class="flex items-center gap-1 bg-slate-950 p-1 rounded-lg border border-slate-800">
+                        <button class="tone-btn px-3 py-1 rounded text-xs font-medium text-slate-400 hover:text-white transition-all" data-tone="friendly">Friendly</button>
+                        <button class="tone-btn active px-3 py-1 rounded text-xs font-medium bg-indigo-600 text-white transition-all" data-tone="neutral">Neutral</button>
+                        <button class="tone-btn px-3 py-1 rounded text-xs font-medium text-slate-400 hover:text-white transition-all" data-tone="firm">Firm</button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                    <div>
+                        <label class="block text-slate-400 mb-1">Your Name</label>
+                        <input type="text" id="emailUserName" value="Alex Rivera" class="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-slate-200">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">Client Name</label>
+                        <input type="text" id="emailClientName" value="Sarah Jenkins" class="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-slate-200">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">Project Name</label>
+                        <input type="text" id="emailProjectName" value="Brand Design System" class="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-slate-200">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1">Custom Justification (Local edit)</label>
+                    <input type="text" id="emailCustomJustification" placeholder="E.g., To align with my standard operational cash flow..." class="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-xs text-slate-200">
+                </div>
+            </div>
+
+            <!-- Email Body Preview -->
+            <div class="p-6 overflow-y-auto flex-1 bg-slate-950">
+                <div class="mb-3 pb-2 border-b border-slate-800">
+                    <span class="text-xs text-slate-400 uppercase font-mono">Subject:</span>
+                    <span id="emailSubject" class="text-sm font-semibold text-indigo-300 ml-2">Review of Contract Payment Terms</span>
+                </div>
+                <textarea id="emailBodyText" rows="10" class="w-full bg-transparent text-sm text-slate-200 font-sans leading-relaxed focus:outline-none resize-none"></textarea>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-4 border-t border-slate-800 bg-slate-950 flex items-center justify-between text-xs text-slate-400">
+                <span>Personalized locally. No data transmitted.</span>
+                <div class="flex items-center gap-2">
+                    <button id="copyEmailBtn" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-medium rounded-lg text-xs transition-all flex items-center gap-1.5">
+                        <span>📋 Copy to Clipboard</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 bg-slate-950 px-6 py-6 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <p>VaultSign AI (v2) &bull; Built with open-weight models for the Open-Source AI Side Hustle Challenge.</p>
+            <p>Local inference via Ollama &bull; Bound strictly to <code>127.0.0.1</code> &bull; MIT License</p>
+        </div>
+    </footer>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

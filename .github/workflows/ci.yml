@@ -1,0 +1,43 @@
+name: VaultSign AI CI & Evaluation
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    name: Run Unit Tests & Offline Security Guardrails
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ["3.11", "3.12", "3.13"]
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Execute Full Test Suite (23 Tests)
+        run: |
+          python -m pytest -v
+
+      - name: Verify Zero-Trust Offline Isolation
+        run: |
+          python -m pytest tests/test_offline_privacy.py -v
+
+      - name: Run Section 8 Benchmark Matrix (25 Contracts)
+        run: |
+          python -m benchmarks.evaluate

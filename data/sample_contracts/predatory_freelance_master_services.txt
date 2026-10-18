@@ -1,0 +1,24 @@
+MASTER PROFESSIONAL SERVICES AGREEMENT
+
+This Master Professional Services Agreement (the "Agreement") is entered into as of January 15, 2026, by and between Apex Global Media Corp ("Client"), and Alex Rivera ("Contractor").
+
+1. SCOPE OF SERVICES
+Contractor agrees to perform digital design, brand development, and frontend engineering services as directed by Client. Contractor shall revise and modify all deliverables until satisfied to the Client's sole satisfaction without additional fee or compensation.
+
+2. PAYMENT TERMS & DISPUTES
+Client shall pay Contractor fees specified in Statements of Work within ninety (90) days of receipt of invoice (Net-90). Furthermore, payment is contingent upon Client receiving payment from third-party end clients (pay-when-paid). In the event of any disagreement or dispute, Client may withhold any and all payments in the event of any dispute without interest or penalty, and no interest shall accrue on past-due or disputed balances.
+
+3. INTELLECTUAL PROPERTY ASSIGNMENT
+Contractor hereby assigns all right, title and interest, including all copyright, patent, and intellectual property rights, in and to all deliverables and inventions, to Client on a perpetual, irrevocable, worldwide basis throughout the universe. Contractor agrees that all work created is a work made for hire, and such assignment occurs immediately irrespective of payment or receipt of funds, with no carve-out for pre-existing tools, libraries, or background IP.
+
+4. INDEMNIFICATION & UNCAPPED LIABILITY
+Contractor agrees to defend, indemnify and hold harmless Client, its officers, and affiliates against any and all claims, damages, losses, liabilities, and legal fees arising out of the services, without limitation or cap on liability. In no event shall Client be liable to Contractor for any indirect, incidental, or consequential damages.
+
+5. NON-COMPETITION RESTRICTIONS
+During the term of this Agreement and for a period of twenty-four (24) months following termination, Contractor shall not directly or indirectly compete, engage in, or provide services to any competing business in any geographic area worldwide.
+
+6. EXCLUSIVITY OF SERVICES
+Contractor agrees to perform services on an exclusive basis and shall not provide services to any other client or company during the term of this Agreement, devoting full time and attention solely to Client.
+
+7. TERMINATION & CANCELLATION
+Client may terminate this Agreement at will for convenience immediately upon written notice, without further payment or compensation for work in progress, and there shall be no kill fee or cancellation charge.

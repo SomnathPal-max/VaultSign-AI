@@ -1,0 +1,21 @@
+SOFTWARE CONSULTING & ENGINEERING AGREEMENT
+
+This Agreement is made as of March 1, 2026, by and between CloudVentures Inc. ("Company") and DevCraft Solutions ("Consultant").
+
+SECTION 1. ENGAGEMENT AND DELIVERABLES
+Consultant shall develop backend microservices and API integrations. Consultant agrees to perform unlimited revisions without additional fee until deliverables meet the Company's sole satisfaction.
+
+SECTION 2. INVOICING AND COMPENSATION
+Invoices shall be rendered monthly. Company shall remit payment within sixty (60) days of receiving an approved invoice (Net-60). No late fee or interest shall accrue on any overdue invoice balance.
+
+SECTION 3. INTELLECTUAL PROPERTY RIGHTS
+Consultant hereby assigns all right, title and interest in all software, source code, and inventions developed under this agreement on a perpetual and irrevocable basis worldwide. All work shall be considered work made for hire.
+
+SECTION 4. INDEMNITY
+Consultant shall defend, indemnify and hold harmless Company from any third-party intellectual property infringement claims arising from Consultant's custom code, provided that Consultant is notified promptly in writing.
+
+SECTION 5. CONFIDENTIALITY & NON-SOLICITATION
+Both parties agree to protect proprietary technical information. Neither party shall solicit the other's employees for twelve (12) months.
+
+SECTION 6. TERMINATION
+Either party may terminate this agreement with thirty (30) days prior written notice. In the event of early termination, Consultant shall be compensated pro-rata for work completed prior to notice.

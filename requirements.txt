@@ -1,0 +1,7 @@
+# VaultSign AI Dependencies
+# Lightweight, local-first stack with zero external telemetry
+fastapi>=0.115.0
+uvicorn>=0.30.0
+pydantic>=2.8.0
+pymupdf>=1.24.0
+pytest>=8.0.0

@@ -1,0 +1,21 @@
+FAIR INDEPENDENT CONTRACTOR AGREEMENT
+
+This Agreement is made on April 10, 2026, between Horizon Labs ("Client") and Sam Taylor ("Contractor").
+
+1. INDEPENDENT CONTRACTOR STATUS & NON-EXCLUSIVITY
+Contractor acts as an independent contractor. Client acknowledges that Contractor performs professional services for multiple non-conflicting clients and is not subject to any exclusivity or non-competition restrictions.
+
+2. COMPENSATION & PROMPT PAYMENT
+Client shall remit payment within fifteen (15) days of invoice date (Net-15). In the event of late payment, interest shall accrue at 1.5% per month on outstanding undisputed balances.
+
+3. REVISIONS & CHANGE ORDERS
+Fees include up to two (2) rounds of minor revisions within the initial Scope of Work. Any additional modifications or out-of-scope revisions shall be billed at Contractor's standard hourly rate of $150/hr under a written Change Order.
+
+4. INTELLECTUAL PROPERTY & BACKGROUND TOOLS
+Intellectual property rights in custom deliverables shall transfer to Client strictly upon receipt of full and final payment. Contractor retains all ownership rights in pre-existing code libraries, developer tools, and proprietary frameworks, granting Client a perpetual, royalty-free, non-exclusive license to use them solely as incorporated in Deliverables.
+
+5. MUTUAL LIMITATION OF LIABILITY
+Each party agrees to mutual indemnification. In no event shall either party's aggregate liability exceed the total fees paid under this Agreement during the preceding six months. Neither party shall be liable for indirect or consequential damages.
+
+6. TERMINATION & KILL FEE
+Either party may terminate upon fourteen (14) days written notice. In the event of early termination by Client without cause, Client shall pay for all work completed to date plus a 25% kill fee based on remaining project value.
